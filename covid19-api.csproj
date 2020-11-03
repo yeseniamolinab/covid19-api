@@ -5,5 +5,11 @@
         <RootNamespace>covid19_api</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Flurl" Version="3.0.0" />
+      <PackageReference Include="Flurl.Http" Version="3.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    </ItemGroup>
+
 
 </Project>
