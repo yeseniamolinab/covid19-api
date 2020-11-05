@@ -6,9 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="9.2.2" />
       <PackageReference Include="Flurl" Version="3.0.0" />
       <PackageReference Include="Flurl.Http" Version="3.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      <PackageReference Include="Pitcher" Version="2.1.1" />
     </ItemGroup>
 
 
