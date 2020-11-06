@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using covid19_api.Models;
 using System.Threading.Tasks;
 using covid19_api.Common.Constants;
@@ -17,16 +18,33 @@ namespace covid19_api.Services
             _baseUrl = config["Covid19ApiUrl"];
         }
 
-        public async Task<List<CovidStatus>> GetStatus()
+        /// <summary>
+        /// Gets the status asynchronous.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<CovidStatus>> GetStatusAsync()
         {
-            return await _baseUrl
-                .AppendPathSegment("status")
-                .GetJsonAsync<List<CovidStatus>>();
+            var url = _baseUrl.AppendPathSegment(RouteConstants.ByStatus);
+            var result = await url.GetJsonAsync<List<CovidStatus>>().ConfigureAwait(false);
+
+            return result;
         }
 
-        public Task<List<CovidStatus>> GetStatusByCountry(string countryCode)
+        /// <summary>
+        /// Gets the status by country asynchronous.
+        /// </summary>
+        /// <param name="countryCode">The country code.</param>
+        /// <returns></returns>
+        public async Task<IEnumerable<CovidStatus>> GetStatusByCountryAsync(string countryCode)
         {
-            throw new System.NotImplementedException();
+            var query = await _baseUrl
+                .AppendPathSegment(RouteConstants.ByStatus)
+                .GetJsonAsync<List<CovidStatus>>()
+                .ConfigureAwait(false);
+
+            query = query.Where(p => p.Country.Equals(countryCode)).ToList();
+
+            return query;
         }
 
         /// <summary>

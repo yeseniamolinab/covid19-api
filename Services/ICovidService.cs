@@ -9,9 +9,9 @@ namespace covid19_api.Services
     /// </summary>
     public interface ICovidService
     {
-        Task<List<CovidStatus>> GetStatus();
+        Task<IEnumerable<CovidStatus>> GetStatusAsync();
 
-        Task<List<CovidStatus>> GetStatusByCountry(string countryCode);
+        Task<IEnumerable<CovidStatus>> GetStatusByCountryAsync(string countryCode);
 
         Task<IEnumerable<CovidPrediction>> GetPredictionByCountryAsync(string countryCode);
     }

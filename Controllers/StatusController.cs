@@ -1,16 +1,15 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using covid19_api.Common.Constants;
 using covid19_api.Models;
 using covid19_api.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace covid19_api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class StatusController : ControllerBase
+    [Route(ApiConstants.DefaultController)]
+    public class StatusController : BaseController
     {
         private readonly ICovidService _covidService;
 
@@ -19,10 +18,27 @@ namespace covid19_api.Controllers
             _covidService = covidService;
         }
 
+        /// <summary>
+        /// Gets the statuses of covid.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<CovidStatus>> Get()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public Task<IEnumerable<CovidStatus>> Get()
         {
-            return await _covidService.GetStatus();
+            return _covidService.GetStatusAsync();
+        }
+
+        /// <summary>
+        /// Gets the statuses of covid by specified country.
+        /// </summary>
+        /// <param name="country">The country.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route(RouteParamsConstants.Country)]
+        public Task<IEnumerable<CovidStatus>> Get([FromRoute] string country)
+        {
+            return _covidService.GetStatusByCountryAsync(country);
         }
     }
 }
