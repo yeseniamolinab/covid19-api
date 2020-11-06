@@ -10,18 +10,17 @@ namespace covid19_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class Covid19Controller : ControllerBase
+    public class StatusController : ControllerBase
     {
         private readonly ICovidService _covidService;
 
-        public Covid19Controller(ICovidService covidService)
+        public StatusController(ICovidService covidService)
         {
             _covidService = covidService;
         }
-        
+
         [HttpGet]
-        [Route("status")]
-        public async Task<IEnumerable<CovidStatus>> GetStatus()
+        public async Task<IEnumerable<CovidStatus>> Get()
         {
             return await _covidService.GetStatus();
         }

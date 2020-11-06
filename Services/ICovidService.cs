@@ -10,6 +10,6 @@ namespace covid19_api.Services
 
         Task<List<CovidStatus>> GetStatusByCountry(string countryCode);
 
-        Task<List<CovidPrediction>> GetPredictionByCountry(string countryCode);
+        //Task<List<CovidPrediction>> GetPredictionByCountry(string countryCode);
     }
 }
