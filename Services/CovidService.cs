@@ -10,7 +10,7 @@ namespace covid19_api.Services
     public class CovidService : ICovidService
     {
         private readonly string _baseUrl;
-        
+
         public CovidService(IConfiguration config)
         {
             _baseUrl = config["Covid19ApiUrl"];
@@ -21,6 +21,11 @@ namespace covid19_api.Services
             return await _baseUrl
                 .AppendPathSegment("status")
                 .GetJsonAsync<List<CovidStatus>>();
+        }
+
+        public Task<List<CovidStatus>> GetStatusByCountry(string countryCode)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
