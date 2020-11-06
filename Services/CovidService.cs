@@ -42,7 +42,7 @@ namespace covid19_api.Services
                 .GetJsonAsync<List<CovidStatus>>()
                 .ConfigureAwait(false);
 
-            query = query.Where(p => p.Country.Equals(countryCode)).ToList();
+            query = query.Where(p => p.Country.Equals(countryCode.ToUpper())).ToList();
 
             return query;
         }
@@ -56,7 +56,7 @@ namespace covid19_api.Services
         {
             var url = _baseUrl
                 .AppendPathSegment(RouteConstants.ByPrediction)
-                .AppendPathSegment(countryCode);
+                .AppendPathSegment(countryCode.ToUpper());
 
             var result = await url.GetJsonAsync<List<CovidPrediction>>().ConfigureAwait(false);
 
